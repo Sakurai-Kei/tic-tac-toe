@@ -41,7 +41,11 @@ body {
     width: 100%;
 }
 
-.column1, .column2, .column3 {
+.column  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20vh;
     width: 33%;
     border: 1px solid darkslateblue;
     border-radius: 10px;
