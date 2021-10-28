@@ -1,55 +1,54 @@
-const Player = (name, sign) => {
-    this.name = name;
-    this.sign = sign;
+const Player = (_name, _sign) => {
+    this._name = _name;
+    this._sign = _sign;
 
     const getName = () => {
-        return name;
+        return _name;
     };
 
     const getSign = () => {
-        return sign;
+        return _sign;
     };
 
     return {getName, getSign};
 };
 
 const gameArea = (() => {
-    const setPlayArea = Array.from(document.querySelectorAll('.column'));
-    let move = 1;
+    const _setPlayArea = Array.from(document.querySelectorAll('.column'));
+    let _move = 1;
     let getMove = () => {
-        return move;
+        return _move;
     }
-    setPlayArea.forEach(box => {
-        box.addEventListener('click', setAreaSign)
+    _setPlayArea.forEach(box => {
+        box.addEventListener('click', _setAreaSign)
     });
-    function setAreaSign() {
+    function _setAreaSign() {
         if(this.textContent !== ""){
-            console.log(`Illegal Move`)
             return;
         };
-        switch(move%2){
+        switch(_move%2){
             case 1:
                 this.textContent = `${playerX.getSign()}`;
-                move++;
+                _move++;
                 break;
             case 0:
                 this.textContent = `${playerO.getSign()}`;
-                move++;
+                _move++;
                 break;
         };
     };
 
     function getAreaSign() {
-        let playAreaSign = [];
-        setPlayArea.forEach(box => {
-            playAreaSign.push(box.textContent);
+        let _playAreaSign = [];
+        _setPlayArea.forEach(box => {
+            _playAreaSign.push(box.textContent);
         })
-        return playAreaSign;
+        return _playAreaSign;
     }
 
     function resetAreaSign() {
-        move = 1;
-        setPlayArea.forEach(box => {
+        _move = 1;
+        _setPlayArea.forEach(box => {
             box.textContent = "";
         })
     }
@@ -58,47 +57,50 @@ const gameArea = (() => {
 
 const gameInitialise = (() => {
     function winCondition(){
-        let playAreaSign = gameArea.getAreaSign();
-        let row1 = [playAreaSign[0], playAreaSign[1], playAreaSign[2]];
-        let row2 = [playAreaSign[3], playAreaSign[4], playAreaSign[5]];
-        let row3 = [playAreaSign[6], playAreaSign[7], playAreaSign[8]];
-        let column1 = [playAreaSign[0], playAreaSign[3], playAreaSign[6]];
-        let column2 = [playAreaSign[1], playAreaSign[4], playAreaSign[7]];
-        let column3 = [playAreaSign[2], playAreaSign[5], playAreaSign[8]];
-        let diagonal1 = [playAreaSign[0], playAreaSign[4], playAreaSign[8]];
-        let diagonal2 = [playAreaSign[2], playAreaSign[4], playAreaSign[6]];
+        let _playAreaSign = gameArea.getAreaSign();
+        function _playerInputCombined(){
+            let _row1 = [_playAreaSign[0], _playAreaSign[1], _playAreaSign[2]];
+            let _row2 = [_playAreaSign[3], _playAreaSign[4], _playAreaSign[5]];
+            let _row3 = [_playAreaSign[6], _playAreaSign[7], _playAreaSign[8]];
+            let _column1 = [_playAreaSign[0], _playAreaSign[3], _playAreaSign[6]];
+            let _column2 = [_playAreaSign[1], _playAreaSign[4], _playAreaSign[7]];
+            let _column3 = [_playAreaSign[2], _playAreaSign[5], _playAreaSign[8]];
+            let _diagonal1 = [_playAreaSign[0], _playAreaSign[4], _playAreaSign[8]];
+            let _diagonal2 = [_playAreaSign[2], _playAreaSign[4], _playAreaSign[6]];
+    
+            let _rowCombined = [_row1, _row2, _row3];
+            let _columnCombined = [_column1, _column2, _column3];
+            let _diagonalCombined = [_diagonal1, _diagonal2];
 
-        let rowCombined = [row1, row2, row3];
-        let columnCombined = [column1, column2, column3];
-        let diagonalCombined = [diagonal1, diagonal2];
-        
-        rowCombined.forEach(row => {
-            let searchX = row.filter(sign => sign == "X");
-            let searchO = row.filter(sign => sign == "O");
-            if(searchX.length == 3){
+            return {_rowCombined, _columnCombined, _diagonalCombined}
+        }
+        _playerInputCombined()._rowCombined.forEach(row => {
+            let _searchX = row.filter(_sign => _sign == "X");
+            let _searchO = row.filter(_sign => _sign == "O");
+            if(_searchX.length == 3){
                 return console.log(`playerX wins?`);
             }
-            else if(searchO.length == 3){
+            else if(_searchO.length == 3){
                 return console.log(`playerO wins?`);
             }
         })
-        columnCombined.forEach(column => {
-            let searchX = column.filter(sign => sign == "X");
-            let searchO = column.filter(sign => sign == "O");
-            if(searchX.length == 3){
+        _playerInputCombined()._columnCombined.forEach(column => {
+            let _searchX = column.filter(_sign => _sign == "X");
+            let _searchO = column.filter(_sign => _sign == "O");
+            if(_searchX.length == 3){
                 return console.log(`playerX wins?`);
             }
-            else if(searchO.length == 3){
+            else if(_searchO.length == 3){
                 return console.log(`playerO wins?`);
             }
         })
-        diagonalCombined.forEach(diagonal => {
-            let searchX = diagonal.filter(sign => sign =="X");
-            let searchO = diagonal.filter(sign => sign == "O");
-            if(searchX.length == 3){
+        _playerInputCombined()._diagonalCombined.forEach(diagonal => {
+            let _searchX = diagonal.filter(_sign => _sign =="X");
+            let _searchO = diagonal.filter(_sign => _sign == "O");
+            if(_searchX.length == 3){
                 return console.log(`playerX wins?`);
             }
-            else if(searchO.length == 3){
+            else if(_searchO.length == 3){
                 return console.log(`playerO wins?`);
             }
         })
