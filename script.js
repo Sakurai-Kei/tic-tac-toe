@@ -14,13 +14,26 @@ const Player = (name, sign) => {
 }
 
 const gameArea = (() => {
-    const playArea = Array.from(document.querySelectorAll('.column'));
-    playArea.forEach(area => {
-        area.addEventListener('click', setSign)
-        console.log(area);
+    const setPlayArea = Array.from(document.querySelectorAll('.column'));
+    let move = 1;
+    setPlayArea.forEach(box => {
+        box.addEventListener('click', setAreaSign)
     })
-    function setSign() {
-      this.textContent = `${playerX.getSign()}`;
+    function setAreaSign() {
+        console.log(move);
+        console.log(this)
+        switch(move%2){
+            case 1:
+                this.textContent = `${playerX.getSign()}`;
+                console.log(`Log2`)
+                move++;
+                break;
+            case 0:
+                this.textContent = `${playerO.getSign()}`;
+                console.log(`Log3`)
+                move++;
+                break;
+        }
     }
     
 
