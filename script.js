@@ -10,6 +10,28 @@ const Player = (_name, _sign) => {
     return {getName, getSign};
 };
 
+const defaultPlayer = (() => {
+    const _playerX = Player("Sakurai", "X");
+    const _playerO = Player("Cipher", "O");
+
+    function getFirstPlayer() {
+        return _playerX;
+    }
+
+    function getSecondPlayer() {
+        return _playerO;
+    }
+    return {getFirstPlayer,getSecondPlayer}
+})();
+
+const modal = (() => {
+    const exitModal = document.getElementById('modalExit');
+    exitModal.addEventListener('click', () => {
+        const modal = document.getElementById('modal');
+        modal.style.display = 'none';
+    })
+})();
+
 const gameArea = (() => {
     const _setPlayArea = Array.from(document.querySelectorAll('.column'));
     let _move = 1;
@@ -25,12 +47,12 @@ const gameArea = (() => {
         };
         switch(_move%2){
             case 1:
-                this.textContent = `${playerX.getSign()}`;
+                this.textContent = `${defaultPlayer.getFirstPlayer().getSign()}`;
                 _move++;
                 gameRules.winCondition();
                 break;
             case 0:
-                this.textContent = `${playerO.getSign()}`;
+                this.textContent = `${defaultPlayer.getSecondPlayer().getSign()}`;
                 _move++;
                 gameRules.winCondition();
                 break;
@@ -83,12 +105,12 @@ const gameRules = (() => {
             if(_searchX.length == 3){
                 draw = false;
                 _stopInput();
-                return console.log(`playerX wins?`);
+                return alert(`First Player(X) wins!`);
             }
             else if(_searchO.length == 3){
                 draw = false;
                 _stopInput();
-                return console.log(`playerO wins?`);
+                return alert(`Second Player(O) wins!`);
             }
         })
         _playerInputCombined()._columnCombined.forEach(column => {
@@ -97,12 +119,12 @@ const gameRules = (() => {
             if(_searchX.length == 3){
                 draw = false;
                 _stopInput();
-                return console.log(`playerX wins?`);
+                return alert(`First Player(X) wins!`);
             }
             else if(_searchO.length == 3){
                 draw = false;
                 _stopInput();
-                return console.log(`playerO wins?`);
+                return alert(`Second Player(O) wins!`);
             }
         })
         _playerInputCombined()._diagonalCombined.forEach(diagonal => {
@@ -111,16 +133,16 @@ const gameRules = (() => {
             if(_searchX.length == 3){
                 draw = false;
                 _stopInput();
-                return console.log(`playerX wins?`);
+                return alert(`First Player(X) wins!`);
             }
             else if(_searchO.length == 3){
                 draw = false;
                 _stopInput();
-                return console.log(`playerO wins?`);
+                return alert(`Second Player(O) wins!`);
             }
         })
         if(gameArea.getMove() == 10 & draw == true){
-            return console.log(`Draw`);
+            return alert(`Draw!`);
         }
     }
     function startInput() {
@@ -135,5 +157,3 @@ const gameRules = (() => {
     }
     return {winCondition, startInput}
 })();
-const playerX = Player("Sakurai", "X");
-const playerO = Player("Cipher", "O");

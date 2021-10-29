@@ -9,8 +9,24 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="headerContainer">Header Area</div>
+    <div id="headerContainer"><h1>TIC-TAC-TOE</h1></div>
     <div id="middleContainer">
+
+        <div id="modal">
+            <div id="modalContent">
+                    <div id="modalHeader">
+                        <div class="modalText">Welcome</div>
+                        <button id="modalExit">X</button>
+                    </div>
+                <div class="modalText">First Player will play X sign</div>
+                <div class="modalText">Second Player will play O sign</div>
+                <div class="modalText">
+                    To restart, simply press the reload button below
+                    the game board
+                </div>
+            </div>
+        </div>
+
         <div id="gameBoard">
             <div id="row1">
                 <div class="column one"></div>
@@ -30,6 +46,6 @@
         </div>
         <button id="restart">↻</button>
     </div>
-    <div id="footerContainer">Footer Area</div>
+    <div id="footerContainer"><h3>Copyright &copy; 2021 Sakurai-Kei</h3></div>
 </body>
 </html>
