@@ -144,6 +144,7 @@ const gameRules = (() => {
         if(gameArea.getMove() == 10 & draw == true){
             return alert(`Draw!`);
         }
+        draw = true;
     }
     function startInput() {
         _setPlayArea.forEach(box => {
